@@ -1,0 +1,12 @@
+<div>
+  <!-- Use event click -->
+  <button (click)="onSelectUser()" >
+    <!-- Property binding 寫法1 [src]="'assets/users/' + selectedUser.avatar" -->
+    <!-- Property binding 寫法2 從TS 使用 get [src]="imagePath" -->
+    <img
+      [src]="imagePath"
+      [alt]="selectedUser.name"
+    />
+    <span>{{ selectedUser.name }}</span>
+  </button>
+</div>
