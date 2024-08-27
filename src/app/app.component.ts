@@ -22,7 +22,7 @@ export class AppComponent {
 
   // 建立一個getter，用來取得選擇的user
   get selectedUser() {
-    return this.users.find((user) => user.id === this.selectUserId)!; // 使用驚嘆號，表示一定會找到
+    return this.users.find((user) => user.id === this.selectUserId); // 使用驚嘆號，表示一定會找到
   }
 
   onSelectUser(id: string) {
