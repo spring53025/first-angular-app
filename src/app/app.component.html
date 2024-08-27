@@ -2,29 +2,13 @@
 
 <main>
   <ul id="users">
+    @for (user of users; track user.id) {
     <li>
-      <!--  old code
-        [id]="users[1].id"
-        [avatar]="users[1].avatar"
-        [name]="users[1].name"
-        (select)="onSelectUser($event)"
-       -->
-      <app-user [user]="users[0]" (select)="onSelectUser($event)" />
-      <!-- Add custom event binding, like click -->
+      <app-user [user]="user" (select)="onSelectUser($event)" />
     </li>
-    <li>
-      <app-user [user]="users[1]" (select)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[2]" (select)="onSelectUser($event)" />
-    </li>
-    <li>
-      <app-user [user]="users[3]" (select)="onSelectUser($event)" />
-    </li>
+    }
   </ul>
-
-  <!-- <app-tasks [name]="selectedUser?.name" /> -->
-  <app-tasks [name]="selectedUser ? selectedUser.name : ''" />
+  <app-tasks [name]="selectedUser?.name" />
 </main>
 
 <router-outlet />

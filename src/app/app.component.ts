@@ -26,8 +26,6 @@ export class AppComponent {
   }
 
   onSelectUser(id: string) {
-    // console.log('Select user with id', id);
-    // 這邊的id是從user.component.ts中的emit傳過來的
     this.selectUserId = id;
   }
 }
