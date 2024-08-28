@@ -9,6 +9,35 @@ import { TaskComponent } from './task/task.component';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input() name?: string;  //使用 JS ECMAScript 2020 的 optional chaining 新特性，可以是string或undefined
-  // @Input() name: string | undefined; //使用TS的union type，可以是string或undefined
+  @Input({ required: true }) userId!: string;
+  @Input({ required: true }) name!: string;
+  tasks = [
+    {
+      id: 't1',
+      userId: 'u1',
+      title: 'Tasker Angular',
+      summary:
+        'Learn all the basic and advanced features of Angular & how  to apply the them.',
+      dueDate: '2024-09-30',
+    },
+    {
+      id: 't2',
+      userId: 'u3',
+      title: 'Build first prototype',
+      summary: 'Build a first prototype of the online shop website',
+      dueDate: '2024-10-15',
+    },
+    {
+      id: 't3',
+      userId: 'u3',
+      title: 'Prepare issue template',
+      summary:
+        'Prepare and describe an issue template which will help with project management',
+      dueDate: '2024-10-30',
+    },
+  ];
+
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.userId);
+  }
 }
