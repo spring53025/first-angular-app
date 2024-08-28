@@ -11,6 +11,7 @@ import { type User } from './user.model'; //使用type 情楚表示是類型定�
 })
 export class UserComponent {
   @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
 
   @Output() select = new EventEmitter<string>(); //指定泛型的型別，這樣會比較適當
 
