@@ -1,19 +1,6 @@
-import { Component, Input, Output, EventEmitter, output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-// a. 使用type(類型)的方式，一次傳入多個參數
-// type User = {
-//   id: string;
-//   avatar: string;
-//   name: string;
-// };
-
-// b. 使用interface(介面)的方式，一次傳入多個參數，在angular專案，介面比較常見
-// 跟type相比，沒有 = 等號
-interface User {
-  id: string;
-  avatar: string;
-  name: string;
-}
+import { type User } from './user.model'; //使用type 情楚表示是類型定義，但也可以不加
 
 @Component({
   selector: 'app-user',
