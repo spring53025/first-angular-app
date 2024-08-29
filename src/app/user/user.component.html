@@ -1,7 +1,9 @@
-<div>
-  <!-- Use event click -->
+<!-- <div> -->
+<app-card>
+  <!-- 下面這塊，使用ng-content 會合併再一起 -->
   <button [class.active]="selected" (click)="onSelectUser()">
     <img [src]="imagePath" [alt]="user.name" />
     <span>{{ user.name }}</span>
   </button>
-</div>
+</app-card>
+<!-- </div> -->

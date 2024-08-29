@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { type User } from './user.model'; //使用type 情楚表示是類型定義，但也可以不加
+import { type User } from './user.model';
+import { CardComponent } from "../shared/card/card.component"; //使用type 情楚表示是類型定義，但也可以不加
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
