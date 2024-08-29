@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
+
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from "./new-task/new-task.component";
+import { type NewTaskData } from './task/task.model';
+
 
 @Component({
   selector: 'app-tasks',
@@ -53,6 +56,19 @@ export class TasksComponent {
   }
 
   onCancelAddTask() {
+    this.isAddingTask = false;
+  }
+
+  onAddTask(taskData: NewTaskData) {
+    // this.tasks.push({ //加到最後面
+      this.tasks.unshift({ //加到最前面
+      id: new Date().getTime().toString(),
+      userId: this.userId,
+      title: taskData.title,
+      summary: taskData.summary,
+      dueDate: taskData.dueDate,
+    });
+    // 關閉新增 task 的表單
     this.isAddingTask = false;
   }
 }
