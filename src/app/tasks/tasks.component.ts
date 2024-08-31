@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { type NewTaskData } from './task/task.model';
-
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -16,38 +16,25 @@ export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
   isAddingTask: boolean = false; // : boolean 不是必須的
-  tasks = [
-    {
-      id: 't1',
-      userId: 'u1',
-      title: 'Tasker Angular',
-      summary:
-        'Learn all the basic and advanced features of Angular & how  to apply the them.',
-      dueDate: '2024-09-30',
-    },
-    {
-      id: 't2',
-      userId: 'u3',
-      title: 'Build first prototype',
-      summary: 'Build a first prototype of the online shop website',
-      dueDate: '2024-10-15',
-    },
-    {
-      id: 't3',
-      userId: 'u3',
-      title: 'Prepare issue template',
-      summary:
-        'Prepare and describe an issue template which will help with project management',
-      dueDate: '2024-10-30',
-    },
-  ];
+
+  //這種方式會每次都建立一個新的 TasksService 實例 ，不建議使用
+   //建議使用這種方式
+  //第一種
+  // private tasksService = new TasksService();
+  // private tasksService: TasksService;
+  // constructor(tasksService: TasksService) {
+  //   this.tasksService = tasksService;
+  // }
+  //第二種 typescript 的快捷方式，只需要一行就可以完成上面的事情
+  //不需要再寫 private tasksService: TasksService; 這行
+  constructor(private tasksService: TasksService) {}
 
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.userId);
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   onCompleteTask(id: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.tasksService.removeTask(id);
   }
 
   // 變更 isAddingTask 為 true
@@ -60,14 +47,7 @@ export class TasksComponent {
   }
 
   onAddTask(taskData: NewTaskData) {
-    // this.tasks.push({ //加到最後面
-      this.tasks.unshift({ //加到最前面
-      id: new Date().getTime().toString(),
-      userId: this.userId,
-      title: taskData.title,
-      summary: taskData.summary,
-      dueDate: taskData.dueDate,
-    });
+    this.tasksService.addTask(taskData, this.userId);
     // 關閉新增 task 的表單
     this.isAddingTask = false;
   }
